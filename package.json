@@ -1,0 +1,43 @@
+{
+  "name": "create-dotenv",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Create dotenv file for github actions",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "package": "ncc build --source-map --license licenses.txt",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamsauravsharma/create-dotenv.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "dotenv",
+    "github"
+  ],
+  "author": "Saurav Sharma <appdroiddeveloper@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamsauravsharma/create-dotenv/issues"
+  },
+  "homepage": "https://github.com/iamsauravsharma/create-dotenv#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.7"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.41",
+    "@vercel/ncc": "^0.28.3",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  }
+}

@@ -1,0 +1,46 @@
+name: 'Build and test'
+
+on:
+  push:
+    branches:
+      - master
+      - staging
+      - trying
+
+env:
+  PRODUCTION: true
+  ENV_KEY_PROJECT_NAME: dot-env
+
+jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm run install
+      - name: Build and package action
+        run: |
+          npm run format-check && npm run build && npm run package
+  test:
+    name: test env file
+    runs-on: ["ubuntu-latest", "macos-latest", "windows-latest"]
+    env:
+      ENV_KEY_DEBUG: True
+      ENV_KEY_USERNAME: root
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          env-prefix: 'ENV_KEY_'
+          file: 'development.env'
+          directory: 'tests/'
+        env:
+          IS_SERVER: False
+          ENV_KEY_USERNAME: admin
+          ENV_KEY_API_KEY: USER_API_KEY
+          ENV_KEY_SECRET_KEY: secret123
+      - name: Run test
+        run: |
+          npm run test

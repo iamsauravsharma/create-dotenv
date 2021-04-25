@@ -1,0 +1,21 @@
+name: 'Create dotenv'
+author: 'Saurav Sharma'
+description: 'GitHub Action to create .env file in repository'
+inputs:
+  env-prefix:
+    description: 'Prefix for env file content'
+    required: true
+  file-name:
+    description: 'File name for env file'
+    required: false
+    default: '.env'
+  directory:
+    description: 'Directory for env file'
+    required: false
+    default: '.'
+outputs:
+  env-file:
+    description: 'Env file location'
+runs:
+  using: 'node12'
+  main: 'dist/main.js'
