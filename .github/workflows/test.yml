@@ -41,6 +41,9 @@ jobs:
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: secret123
+      - name: Install npm dependencies
+        run: |
+          npm install
       - name: Run test
         run: |
           npm run test
