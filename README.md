@@ -51,7 +51,7 @@ jobs:
           IS_SERVER: true
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
-          ENV_KEY_SECRET_KEY: ${{secrets.SECRET_KEY }}
+          ENV_KEY_SECRET_KEY:secret123
 ```
 will create a development.env file in tests/ directory would contain
 ```sh
@@ -59,5 +59,5 @@ PROJECT_NAME=dot-env
 USERNAME=admin
 DEBUG=true
 API_KEY=USER_API_KEY
-SECRET_KEY=secrets123
+SECRET_KEY=secret123
 ```
