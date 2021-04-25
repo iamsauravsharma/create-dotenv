@@ -27,7 +27,7 @@ jobs:
     name: test env file
     runs-on: ubuntu-latest
     env:
-      ENV_KEY_DEBUG: True
+      ENV_KEY_DEBUG: true
       ENV_KEY_USERNAME: root
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
           file-name: 'development.env'
           directory: 'tests/'
         env:
-          IS_SERVER: False
+          IS_SERVER: false
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: secret123
