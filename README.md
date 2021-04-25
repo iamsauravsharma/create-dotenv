@@ -8,7 +8,7 @@ This action creates dotenv file
 
 **Required** The prefix for environmental variable which should be stored in .env file. If you need to store all environmental varaible then you can pass `''` as env-prefix which will store all environmental variable in .env file
 
-### `file`
+### `file-name`
 Location of dot env file. Default is `.env`
 
 ### `directory`
@@ -45,7 +45,7 @@ jobs:
       - uses: iamsauravsharma/create-dotenv@v0.1.0
         with:
           env-prefix: 'ENV_KEY_' # Required
-          file: 'development.env' # Optional (default : .env)
+          file-name: 'development.env' # Optional (default : .env)
           directory: 'tests/' # Optional (default: .)
         env: # env available for only this steps
           IS_SERVER: true
