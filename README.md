@@ -35,7 +35,7 @@ jobs:
   create-env-file:
     name: Create env file
     runs-on: ubuntu-latest
-    env: # anv available for all steps of jobs
+    env: # env available for all steps of jobs
       ENV_KEY_DEBUG: true
       ENV_KEY_USERNAME: root
     
