@@ -44,8 +44,8 @@ for (const key of Object.keys(env)) {
     }
 }
 const envFilePath = path.join(directory, fileName);
-fs.writeFileSync(envFilePath, envFileContent);
 const envFullPath = path.resolve(envFilePath);
+fs.writeFileSync(envFilePath, envFileContent);
 core.setOutput("env-file", envFullPath);
 
 
