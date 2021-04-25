@@ -24,14 +24,18 @@ jobs:
         run: |
           npm run format-check && npm run build && npm run package
   test:
-    name: test env file
-    runs-on: ubuntu-latest
+    name: Test env file
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
     env:
       ENV_KEY_DEBUG: true
       ENV_KEY_USERNAME: root
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - id: test-action
+        uses: ./
         with:
           env-prefix: 'ENV_KEY_'
           file-name: 'development.env'
@@ -45,5 +49,7 @@ jobs:
         run: |
           npm install
       - name: Run test
+        env:
+          ENV_FILE: ${{ steps.test-action.outputs.env-file }}
         run: |
           npm run test
