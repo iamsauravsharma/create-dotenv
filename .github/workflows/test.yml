@@ -34,7 +34,7 @@ jobs:
       - uses: ./
         with:
           env-prefix: 'ENV_KEY_'
-          file: 'development.env'
+          file-name: 'development.env'
           directory: 'tests/'
         env:
           IS_SERVER: False
