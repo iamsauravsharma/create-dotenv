@@ -28,7 +28,7 @@ on: [ push ]
 
 env: # env available for all jobs all steps
   PRODUCTION: true
-  ENV_KEY_PROJECT_NAME: dotenv
+  ENV_KEY_PROJECT_NAME: dot-env
 
 jobs:
   
@@ -36,7 +36,7 @@ jobs:
     name: Create env file
     runs-on: ubuntu-latest
     env: # anv available for all steps of jobs
-      ENV_KEY_DEBUG: True
+      ENV_KEY_DEBUG: true
       ENV_KEY_USERNAME: root
     
     steps:
@@ -48,16 +48,16 @@ jobs:
           file: 'development.env' # Optional (default : .env)
           directory: 'tests/' # Optional (default: .)
         env: # env available for only this steps
-          IS_SERVER: False
+          IS_SERVER: true
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: ${{secrets.SECRET_KEY }}
 ```
 will create a development.env file in tests/ directory would contain
 ```sh
-PROJECT_NAME=dotenv
+PROJECT_NAME=dot-env
 USERNAME=admin
-DEBUG=True
+DEBUG=true
 API_KEY=USER_API_KEY
 SECRET_KEY=secrets123
 ```
