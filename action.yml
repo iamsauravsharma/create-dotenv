@@ -1,6 +1,9 @@
 name: 'Create dotenv'
 author: 'Saurav Sharma'
 description: 'GitHub Action to create .env file in repository'
+branding:
+  icon: 'terminal'
+  color: 'blue'
 inputs:
   env-prefix:
     description: 'Prefix for env file content'
