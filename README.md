@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: iamsauravsharma/create-dotenv@v0.1.0
+      - uses: iamsauravsharma/create-dotenv@v1.0.0
         with:
           env-prefix: 'ENV_KEY_' # Required
           file-name: 'development.env' # Optional (default : .env)
@@ -51,7 +51,7 @@ jobs:
           IS_SERVER: true
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
-          ENV_KEY_SECRET_KEY:secret123
+          ENV_KEY_SECRET_KEY: secret123
 ```
 will create a development.env file in tests/ directory would contain
 ```sh
