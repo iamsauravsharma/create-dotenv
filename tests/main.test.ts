@@ -16,6 +16,7 @@ test("test if env file value matched with actual value", async () => {
         ["USERNAME", "admin"],
         ["API_KEY", "USER_API_KEY"],
         ["SECRET_KEY", "secret123"],
+        ["ENV_KEY_MULTIPLE", "test"],
     ]);
     let actualMap: Map<string, string> = new Map();
     const readLineInterface = readline.createInterface({
