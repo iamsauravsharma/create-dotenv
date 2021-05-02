@@ -1,39 +1,18 @@
 import * as core from "@actions/core";
-import * as fs from "fs";
 import * as path from "path";
+import { readInput, Input } from "./input";
+import { readEnv } from "./env";
+import { writeToFile } from "./file";
 
 async function run(): Promise<void> {
-    const envPrefix = core.getInput("env-prefix");
-    const fileName = core.getInput("file-name");
-    const directory = core.getInput("directory");
+    const input: Input = readInput();
 
-    const env = process.env;
+    const envFileMap = readEnv(input.envPrefix);
 
-    let envFileContent = "";
-    for (const [key, value] of Object.entries(env)) {
-        if (key.startsWith(envPrefix)) {
-            const regex = RegExp(`^${envPrefix}`);
-
-            const envKeyName = key.replace(regex, "");
-            const envKeyValue = String(value);
-
-            envFileContent = envFileContent.concat(
-                envKeyName,
-                "=",
-                envKeyValue,
-                "\n"
-            );
-        }
-    }
-
-    const envFilePath = path.join(directory, fileName);
+    const envFilePath = path.join(input.directory, input.fileName);
     const envFullPath = path.resolve(envFilePath);
 
-    fs.writeFile(envFilePath, envFileContent, (err) => {
-        if (err) {
-            core.setFailed(`Action failed with error ${err}`);
-        }
-    });
+    await writeToFile(envFilePath, envFileMap);
 
     core.setOutput("env-file", envFullPath);
 }
