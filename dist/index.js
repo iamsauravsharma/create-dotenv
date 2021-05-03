@@ -195,7 +195,7 @@ function run() {
         const envFilePath = path.join(input.directory, input.fileName);
         const envFullPath = path.resolve(envFilePath);
         yield file_1.writeToFile(envFilePath, envFileMap);
-        core.info(`Setting env-file output as ${envFilePath}`);
+        core.info(`Setting env-file output as ${envFullPath}`);
         core.setOutput("env-file", envFullPath);
     });
 }
