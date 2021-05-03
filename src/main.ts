@@ -14,6 +14,8 @@ async function run(): Promise<void> {
 
     await writeToFile(envFilePath, envFileMap);
 
+    core.info(`Setting env-file output as ${envFilePath}`);
+
     core.setOutput("env-file", envFullPath);
 }
 

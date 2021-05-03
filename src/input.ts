@@ -7,6 +7,8 @@ export interface Input {
 }
 
 export function readInput(): Input {
+    core.info("Reading input parameters");
+
     const envPrefix = core.getInput("env-prefix");
     const fileName = core.getInput("file-name");
     const directory = core.getInput("directory");
