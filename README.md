@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: iamsauravsharma/create-dotenv@v1.0.0
+      - uses: iamsauravsharma/create-dotenv@v1.1.0
         with:
           env-prefix: 'ENV_KEY_' # Required
           file-name: 'development.env' # Optional (default : .env)
