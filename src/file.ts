@@ -23,7 +23,7 @@ export async function writeToFile(
 ): Promise<void> {
     const envFileContent = envContentFromMap(contentMap);
 
-    core.info(`Writing env content to file to ${envFilePath}`);
+    core.info(`Writing env content to file ${envFilePath}`);
 
     fs.writeFile(envFilePath, envFileContent, (err) => {
         if (err) {
