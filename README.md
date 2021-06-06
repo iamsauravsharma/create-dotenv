@@ -6,13 +6,13 @@ This action creates dotenv file
 
 ### `env-prefix`
 
-**Required** The prefix for environmental variable which should be stored in .env file. If you need to store all environmental varaible then you can pass `''` as env-prefix which will store all environmental variable in .env file
+The prefix for environmental variable which should be stored in .env file. Default is empty string i.e `''` which will store all environmental as it is without modification
 
 ### `file-name`
-Location of dot env file. Default is `.env`
+Location of dot env file. Default is `'.env'`
 
 ### `directory`
-Dot env file directory path default is `.`
+Dot env file directory path default is `'.'`
 
 ## Outputs
 
@@ -44,9 +44,9 @@ jobs:
       
       - uses: iamsauravsharma/create-dotenv@v1.1.0
         with:
-          env-prefix: 'ENV_KEY_' # Required
-          file-name: 'development.env' # Optional (default : .env)
-          directory: 'tests/' # Optional (default: .)
+          env-prefix: 'ENV_KEY_' # Optional (default: '')
+          file-name: 'development.env' # Optional (default : '.env')
+          directory: 'tests/' # Optional (default: '.')
         env: # env available for only this steps
           IS_SERVER: true
           ENV_KEY_USERNAME: admin
