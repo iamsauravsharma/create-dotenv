@@ -6,7 +6,7 @@ This action creates dotenv file
 
 ### `env-prefix`
 
-The prefix for environmental variable which should be stored in .env file. Default is empty string i.e `''` which will store all environmental as it is without modification
+The prefix for environmental variable which should be stored in .env file. Default is empty string i.e `''` which will store all environmental variable as it is without modification
 
 ### `file-name`
 Location of dot env file. Default is `'.env'`
@@ -53,7 +53,7 @@ jobs:
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: secret123
 ```
-will create a development.env file in tests/ directory would contain
+will create a development.env file in tests/ directory which would contain
 ```sh
 PROJECT_NAME=dot-env
 USERNAME=admin
