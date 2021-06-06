@@ -98,7 +98,7 @@ function envContentFromMap(contentMap) {
 function writeToFile(envFilePath, contentMap) {
     return __awaiter(this, void 0, void 0, function* () {
         const envFileContent = envContentFromMap(contentMap);
-        core.info(`Writing env content to file to ${envFilePath}`);
+        core.info(`Writing env content to file ${envFilePath}`);
         fs.writeFile(envFilePath, envFileContent, (err) => {
             if (err) {
                 core.setFailed(err);

@@ -7,7 +7,8 @@ branding:
 inputs:
   env-prefix:
     description: 'Prefix for env file content'
-    required: true
+    required: false
+    default: ''
   file-name:
     description: 'File name for env file'
     required: false
