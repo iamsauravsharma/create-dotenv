@@ -23,6 +23,14 @@ jobs:
       - name: Build and package action
         run: |
           npm run format-check && npm run build && npm run package
+      - name: Verify is there is no diff
+        run: |
+          if [[ -n $(git diff --exit-code) ]]
+          then
+            echo "Please run `npm run build && npm run package` to update dist folder"
+            exit
+          fi
+
   test:
     name: Test env file
     strategy:
