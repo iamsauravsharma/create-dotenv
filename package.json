@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/iamsauravsharma/create-dotenv#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0"
+    "@actions/core": "^1.10.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
