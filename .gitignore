@@ -1,2 +1,6 @@
+# Npm related
 node_modules/
 lib/
+
+# Mac related
+.DS_STORE
