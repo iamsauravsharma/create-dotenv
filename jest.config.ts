@@ -1,9 +1,9 @@
-import type { Config } from "@jest/types";
+import type { Config } from "jest";
 
-export default async (): Promise<Config.InitialOptions> => {
-    return {
-        preset: "ts-jest",
-        testEnvironment: "node",
-        verbose: true,
-    };
+const config: Config = {
+    preset: "ts-jest",
+    testEnvironment: "node",
+    verbose: true,
 };
+
+export default config;

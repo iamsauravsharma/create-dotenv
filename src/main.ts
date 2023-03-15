@@ -1,6 +1,8 @@
 import * as core from "@actions/core";
 import * as path from "path";
-import { readInput, Input } from "./input";
+
+import { Input, readInput } from "./input";
+
 import { readEnv } from "./env";
 import { writeToFile } from "./file";
 
