@@ -1,9 +1,0 @@
-status = [
-    "Build package",
-    "Test env file (ubuntu-latest)",
-    "Test env file (macos-latest)",
-    "Test env file (windows-latest)",
-]
-block_labels = ["invalid", "duplicate", "blocked", "WIP"]
-pr_status = ["DCO", "CommitCheck", "WIP"]
-delete_merged_branches = true
