@@ -1,5 +1,5 @@
-import * as core from "@actions/core";
-import * as path from "path";
+import { info, setOutput } from "@actions/core";
+import { join, resolve } from "path";
 
 import { Input, readInput } from "./input";
 
@@ -11,14 +11,14 @@ async function run(): Promise<void> {
 
     const envFileMap = readEnv(input.envPrefix);
 
-    const envFilePath = path.join(input.directory, input.fileName);
-    const envFullPath = path.resolve(envFilePath);
+    const envFilePath = join(input.directory, input.fileName);
+    const envFullPath = resolve(envFilePath);
 
     await writeToFile(envFilePath, envFileMap);
 
-    core.info(`Setting env-file output as ${envFullPath}`);
+    info(`Setting env-file output as ${envFullPath}`);
 
-    core.setOutput("env-file", envFullPath);
+    setOutput("env-file", envFullPath);
 }
 
 run();

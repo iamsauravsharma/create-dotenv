@@ -9,14 +9,17 @@ This action creates dotenv file
 The prefix for environmental variable which should be stored in .env file. Default is empty string i.e `''` which will store all environmental variable as it is without modification
 
 ### `file-name`
+
 Location of dot env file. Default is `'.env'`
 
 ### `directory`
+
 Dot env file directory path default is `'.'`
 
 ## Outputs
 
 ### `env-file`
+
 Absolute location of env file created by action
 
 ## Example usage
@@ -24,14 +27,13 @@ Absolute location of env file created by action
 ```yaml
 name: Create env file
 
-on: [ push ]
+on: [push]
 
 env: # env available for all jobs all steps
   PRODUCTION: true
   ENV_KEY_PROJECT_NAME: dot-env
 
 jobs:
-  
   create-env-file:
     name: Create env file
     runs-on: ubuntu-latest
@@ -53,8 +55,10 @@ jobs:
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: secret123
 ```
+
 will create a development.env file in tests/ directory which would contain
-```sh
+
+```bash
 PROJECT_NAME=dot-env
 USERNAME=admin
 DEBUG=true

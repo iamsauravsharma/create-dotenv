@@ -2,40 +2,17 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 699:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.readEnv = void 0;
-const core = __importStar(__nccwpck_require__(733));
+const core_1 = __nccwpck_require__(733);
 function readEnv(envPrefix) {
     const env = process.env;
-    let envFileMap = new Map();
-    core.info("Reading environmental variable");
+    const envFileMap = new Map();
+    (0, core_1.info)("Reading environmental variable");
     for (const [key, value] of Object.entries(env)) {
         if (key.startsWith(envPrefix)) {
             const regex = RegExp(`^${envPrefix}`);
@@ -56,29 +33,6 @@ exports.readEnv = readEnv;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -90,27 +44,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.writeToFile = void 0;
-const core = __importStar(__nccwpck_require__(733));
-const fs = __importStar(__nccwpck_require__(147));
-const os = __importStar(__nccwpck_require__(37));
+const core_1 = __nccwpck_require__(733);
+const fs_1 = __nccwpck_require__(147);
+const os_1 = __nccwpck_require__(37);
 function envContentFromMap(contentMap) {
-    core.info("Converting env content map to array");
-    let envFileArray = new Array();
+    (0, core_1.info)("Converting env content map to array");
+    const envFileArray = [];
     for (const [key, value] of contentMap) {
-        const envLine = key + "=" + value;
+        const envLine = `${key}=${value}`;
         envFileArray.push(envLine);
     }
-    core.info("Converting env array into string");
-    const envContent = envFileArray.join(os.EOL);
+    (0, core_1.info)("Converting env array into string");
+    const envContent = envFileArray.join(os_1.EOL);
     return envContent;
 }
 function writeToFile(envFilePath, contentMap) {
     return __awaiter(this, void 0, void 0, function* () {
         const envFileContent = envContentFromMap(contentMap);
-        core.info(`Writing env content to file ${envFilePath}`);
-        fs.writeFile(envFilePath, envFileContent, (err) => {
+        (0, core_1.info)(`Writing env content to file ${envFilePath}`);
+        (0, fs_1.writeFile)(envFilePath, envFileContent, (err) => {
             if (err) {
-                core.setFailed(err);
+                (0, core_1.setFailed)(err);
             }
         });
     });
@@ -121,41 +75,18 @@ exports.writeToFile = writeToFile;
 /***/ }),
 
 /***/ 987:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.readInput = void 0;
-const core = __importStar(__nccwpck_require__(733));
+const core_1 = __nccwpck_require__(733);
 function readInput() {
-    core.info("Reading input parameters");
-    const envPrefix = core.getInput("env-prefix");
-    const fileName = core.getInput("file-name");
-    const directory = core.getInput("directory");
+    (0, core_1.info)("Reading input parameters");
+    const envPrefix = (0, core_1.getInput)("env-prefix");
+    const fileName = (0, core_1.getInput)("file-name");
+    const directory = (0, core_1.getInput)("directory");
     const inputContent = { envPrefix, fileName, directory };
     return inputContent;
 }
@@ -169,29 +100,6 @@ exports.readInput = readInput;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -202,8 +110,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(733));
-const path = __importStar(__nccwpck_require__(17));
+const core_1 = __nccwpck_require__(733);
+const path_1 = __nccwpck_require__(17);
 const input_1 = __nccwpck_require__(987);
 const env_1 = __nccwpck_require__(699);
 const file_1 = __nccwpck_require__(255);
@@ -211,11 +119,11 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const input = (0, input_1.readInput)();
         const envFileMap = (0, env_1.readEnv)(input.envPrefix);
-        const envFilePath = path.join(input.directory, input.fileName);
-        const envFullPath = path.resolve(envFilePath);
+        const envFilePath = (0, path_1.join)(input.directory, input.fileName);
+        const envFullPath = (0, path_1.resolve)(envFilePath);
         yield (0, file_1.writeToFile)(envFilePath, envFileMap);
-        core.info(`Setting env-file output as ${envFullPath}`);
-        core.setOutput("env-file", envFullPath);
+        (0, core_1.info)(`Setting env-file output as ${envFullPath}`);
+        (0, core_1.setOutput)("env-file", envFullPath);
     });
 }
 run();
