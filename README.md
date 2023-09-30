@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: iamsauravsharma/create-dotenv@v1.2.3
+      - uses: iamsauravsharma/create-dotenv@v2.0.0
         with:
           input-prefix: 'ENV_KEY_' # Optional (default: '')
           file-name: 'tests/development.env' # Optional (default : '.env')
