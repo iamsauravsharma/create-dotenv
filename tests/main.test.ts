@@ -2,21 +2,15 @@ import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
 
-test("test if output value from action is same file as expected", async () => {
-    const envFilePath = path.resolve(__dirname, "development.env");
-    const envFileLocation = String(process.env["ENV_FILE"]);
-    expect(envFileLocation).toBe(envFilePath);
-});
-
 test("test if env file value matched with actual value", async () => {
     const envFilePath = path.resolve(__dirname, "development.env");
     const expectedMap = new Map([
-        ["PROJECT_NAME", "dot-env"],
-        ["DEBUG", "true"],
-        ["USERNAME", "admin"],
-        ["API_KEY", "USER_API_KEY"],
-        ["SECRET_KEY", "secret123"],
-        ["ENV_KEY_MULTIPLE", "test"],
+        ["OUTPUT_PROJECT_NAME", "dot-env"],
+        ["OUTPUT_DEBUG", "true"],
+        ["OUTPUT_USERNAME", "admin"],
+        ["OUTPUT_API_KEY", "USER_API_KEY"],
+        ["OUTPUT_SECRET_KEY", "secret123"],
+        ["OUTPUT_ENV_KEY_MULTIPLE", "test"],
     ]);
     let actualMap: Map<string, string> = new Map();
     const readLineInterface = readline.createInterface({

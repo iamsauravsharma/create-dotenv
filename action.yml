@@ -5,21 +5,18 @@ branding:
     icon: "terminal"
     color: "blue"
 inputs:
-    env-prefix:
-        description: "Prefix for env file content"
+    input-prefix:
+        description: "Prefix for environment variable"
         required: false
         default: ""
-    file-name:
-        description: "File name for env file"
+    file-path:
+        description: "Full path for env file"
         required: false
         default: ".env"
-    directory:
-        description: "Directory for env file"
+    output-prefix:
+        description: "Prefix for .env file content"
         required: false
-        default: "."
-outputs:
-    env-file:
-        description: "Env file location"
+        default: ""
 runs:
     using: "node20"
     main: "dist/index.js"

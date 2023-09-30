@@ -47,20 +47,20 @@ exports.writeToFile = void 0;
 const core_1 = __nccwpck_require__(434);
 const fs_1 = __nccwpck_require__(147);
 const os_1 = __nccwpck_require__(37);
-function envContentFromMap(contentMap) {
+function envContentFromMap(contentMap, outputPrefix) {
     (0, core_1.info)("Converting env content map to array");
     const envFileArray = [];
     for (const [key, value] of contentMap) {
-        const envLine = `${key}=${value}`;
+        const envLine = `${outputPrefix}${key}=${value}`;
         envFileArray.push(envLine);
     }
     (0, core_1.info)("Converting env array into string");
     const envContent = envFileArray.join(os_1.EOL);
     return envContent;
 }
-function writeToFile(envFilePath, contentMap) {
+function writeToFile(envFilePath, contentMap, outputPrefix) {
     return __awaiter(this, void 0, void 0, function* () {
-        const envFileContent = envContentFromMap(contentMap);
+        const envFileContent = envContentFromMap(contentMap, outputPrefix);
         (0, core_1.info)(`Writing env content to file ${envFilePath}`);
         (0, fs_1.writeFile)(envFilePath, envFileContent, (err) => {
             if (err) {
@@ -84,11 +84,10 @@ exports.readInput = void 0;
 const core_1 = __nccwpck_require__(434);
 function readInput() {
     (0, core_1.info)("Reading input parameters");
-    const envPrefix = (0, core_1.getInput)("env-prefix");
-    const fileName = (0, core_1.getInput)("file-name");
-    const directory = (0, core_1.getInput)("directory");
-    const inputContent = { envPrefix, fileName, directory };
-    return inputContent;
+    const inputPrefix = (0, core_1.getInput)("input-prefix");
+    const filePath = (0, core_1.getInput)("file-path");
+    const outputPrefix = (0, core_1.getInput)("output-prefix");
+    return { inputPrefix, filePath, outputPrefix };
 }
 exports.readInput = readInput;
 
@@ -110,20 +109,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __nccwpck_require__(434);
-const path_1 = __nccwpck_require__(17);
 const input_1 = __nccwpck_require__(734);
 const env_1 = __nccwpck_require__(513);
 const file_1 = __nccwpck_require__(695);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const input = (0, input_1.readInput)();
-        const envFileMap = (0, env_1.readEnv)(input.envPrefix);
-        const envFilePath = (0, path_1.join)(input.directory, input.fileName);
-        const envFullPath = (0, path_1.resolve)(envFilePath);
-        yield (0, file_1.writeToFile)(envFilePath, envFileMap);
-        (0, core_1.info)(`Setting env-file output as ${envFullPath}`);
-        (0, core_1.setOutput)("env-file", envFullPath);
+        const envFileMap = (0, env_1.readEnv)(input.inputPrefix);
+        yield (0, file_1.writeToFile)(input.filePath, envFileMap, input.outputPrefix);
     });
 }
 run();
