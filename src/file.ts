@@ -2,12 +2,15 @@ import { info, setFailed } from "@actions/core";
 import { writeFile } from "fs";
 import { EOL } from "os";
 
-function envContentFromMap(contentMap: Map<string, string>): string {
+function envContentFromMap(
+    contentMap: Map<string, string>,
+    outputPrefix: string,
+): string {
     info("Converting env content map to array");
 
     const envFileArray: string[] = [];
     for (const [key, value] of contentMap) {
-        const envLine = `${key}=${value}`;
+        const envLine = `${outputPrefix}${key}=${value}`;
         envFileArray.push(envLine);
     }
 
@@ -20,8 +23,9 @@ function envContentFromMap(contentMap: Map<string, string>): string {
 export async function writeToFile(
     envFilePath: string,
     contentMap: Map<string, string>,
+    outputPrefix: string,
 ): Promise<void> {
-    const envFileContent = envContentFromMap(contentMap);
+    const envFileContent = envContentFromMap(contentMap, outputPrefix);
 
     info(`Writing env content to file ${envFilePath}`);
 

@@ -46,9 +46,9 @@ jobs:
       
       - uses: iamsauravsharma/create-dotenv@v1.2.3
         with:
-          env-prefix: 'ENV_KEY_' # Optional (default: '')
-          file-name: 'development.env' # Optional (default : '.env')
-          directory: 'tests/' # Optional (default: '.')
+          input-prefix: 'ENV_KEY_' # Optional (default: '')
+          file-name: 'tests/development.env' # Optional (default : '.env')
+          output-prefix: 'OUTPUT_' # Optional (default: '')
         env: # env available for only this steps
           IS_SERVER: true
           ENV_KEY_USERNAME: admin
@@ -59,9 +59,9 @@ jobs:
 will create a development.env file in tests/ directory which would contain
 
 ```bash
-PROJECT_NAME=dot-env
-USERNAME=admin
-DEBUG=true
-API_KEY=USER_API_KEY
-SECRET_KEY=secret123
+OUTPUT_PROJECT_NAME=dot-env
+OUTPUT_USERNAME=admin
+OUTPUT_DEBUG=true
+OUTPUT_API_KEY=USER_API_KEY
+OUTPUT_SECRET_KEY=secret123
 ```
