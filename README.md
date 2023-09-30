@@ -4,17 +4,17 @@ This action creates dotenv file
 
 ## Inputs
 
-### `env-prefix`
+### `input-prefix`
 
 The prefix for environmental variable which should be stored in .env file. Default is empty string i.e `''` which will store all environmental variable as it is without modification
 
-### `file-name`
+### `file-path`
 
 Location of dot env file. Default is `'.env'`
 
-### `directory`
+### `output-prefix`
 
-Dot env file directory path default is `'.'`
+The prefix which should be added to .env file. Default is `''` which adds environment variable as it is after removing input-prefix from it
 
 ## Outputs
 
