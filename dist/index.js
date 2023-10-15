@@ -14,11 +14,19 @@ function readEnv(envPrefix) {
     const envFileMap = new Map();
     (0, core_1.info)("Reading environmental variable");
     for (const [key, value] of Object.entries(env)) {
-        if (key.startsWith(envPrefix)) {
-            const regex = RegExp(`^${envPrefix}`);
-            const envKeyName = key.replace(regex, "");
-            const envKeyValue = String(value);
-            envFileMap.set(envKeyName, envKeyValue);
+        if (envPrefix) {
+            if (key.startsWith(envPrefix)) {
+                const regex = RegExp(`^${envPrefix}`);
+                const envKeyName = key.replace(regex, "");
+                const envKeyValue = String(value);
+                envFileMap.set(envKeyName, envKeyValue);
+            }
+        }
+        else {
+            const preDefinedEnvPrefix = ["GITHUB_", "RUNNER_"];
+            if (!preDefinedEnvPrefix.some((prefix) => key.startsWith(prefix))) {
+                envFileMap.set(key, String(value));
+            }
         }
     }
     return envFileMap;
