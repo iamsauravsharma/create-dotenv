@@ -16,12 +16,6 @@ Location of dot env file. Default is `'.env'`
 
 The prefix which should be added to .env file. Default is `''` which adds environment variable as it is after removing input-prefix from it
 
-## Outputs
-
-### `env-file`
-
-Absolute location of env file created by action
-
 ## Example usage
 
 ```yaml
