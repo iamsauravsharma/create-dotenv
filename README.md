@@ -34,10 +34,9 @@ jobs:
     env: # env available for all steps of jobs
       ENV_KEY_DEBUG: true
       ENV_KEY_USERNAME: root
-    
+
     steps:
-      - uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v4
       - uses: iamsauravsharma/create-dotenv@v2.0.1
         with:
           input-prefix: 'ENV_KEY_' # Optional (default: '')
