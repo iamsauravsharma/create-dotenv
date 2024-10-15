@@ -6,7 +6,7 @@ This action creates dotenv file
 
 ### `input-prefix`
 
-The prefix for environmental variable which should be stored in dot env file. Default is empty string i.e `''` which will store all environmental variable as it is without modification expects environment variable which starts with prefix `GITHUB_` or `RUNNER_`
+The prefix for environmental variable which should be stored in dot env file. Default is empty string i.e `''` which will store all environmental variable as it is without modification expects environment variable which starts with prefix `GITHUB_` or `RUNNER_`. If you needs to also add `GITHUB_` or `RUNNER_` environment variable create another steps which has prefix set to `GITHUB_` or `RUNNER_`
 
 ### `file-path`
 
