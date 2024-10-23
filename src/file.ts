@@ -10,7 +10,8 @@ function envContentFromMap(
 
     const envFileArray: string[] = [];
     for (const [key, value] of contentMap) {
-        const envLine = `${outputPrefix}${key}=${value}`;
+        const envValue = value.includes("\n") ? `"${value}"` : value;
+        const envLine = `${outputPrefix}${key}=${envValue}`;
         envFileArray.push(envLine);
     }
 

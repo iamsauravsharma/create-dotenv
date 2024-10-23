@@ -4,3 +4,4 @@ lib/
 
 # Mac related
 .DS_STORE
+*.env

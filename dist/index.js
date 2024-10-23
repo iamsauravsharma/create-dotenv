@@ -58,7 +58,8 @@ function envContentFromMap(contentMap, outputPrefix) {
     (0, core_1.info)("Converting env content map to array");
     const envFileArray = [];
     for (const [key, value] of contentMap) {
-        const envLine = `${outputPrefix}${key}=${value}`;
+        const envValue = value.includes("\n") ? `"${value}"` : value;
+        const envLine = `${outputPrefix}${key}=${envValue}`;
         envFileArray.push(envLine);
     }
     (0, core_1.info)("Converting env array into string");
