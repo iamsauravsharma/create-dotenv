@@ -32,8 +32,8 @@ jobs:
         run: |
           if [[ -n $(git diff --exit-code) ]]
           then
-            echo "Please run `pnpm run build && pnpm run package` to update dist folder"
-            exit
+            echo "Please run pnpm run build && pnpm run package to update dist folder"
+            exit 1
           fi
 
   test:
@@ -67,6 +67,15 @@ jobs:
           ENV_KEY_SECRET_KEY: secret123
           ENV_KEY_ENV_KEY_MULTIPLE: test
           SOME_ENV_KEY: no_value
+          ENV_KEY_WITH_QUOTE: "quote_value"
+          ENV_KEY_WITH_START_QUOTE: '''"quote'''
+          ENV_KEY_WITH_NON_START_QUOTE: quote"_value"
+          ENV_KEY_MULTILINE: |
+            some multiline
+            string here
+      - name: Cat generated dot env file
+        run: |
+          cat tests/development.env
       - name: Install pnpm dependencies
         run: |
           pnpm install

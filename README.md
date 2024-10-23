@@ -47,6 +47,9 @@ jobs:
           ENV_KEY_USERNAME: admin
           ENV_KEY_API_KEY: USER_API_KEY
           ENV_KEY_SECRET_KEY: secret123
+          ENV_KEY_MULTILINE: |
+            multi line value
+            is here
 ```
 
 will create a development.env file in tests/ directory which would contain
@@ -57,4 +60,9 @@ OUTPUT_USERNAME=admin
 OUTPUT_DEBUG=true
 OUTPUT_API_KEY=USER_API_KEY
 OUTPUT_SECRET_KEY=secret123
+OUTPUT_MULTILINE="multi line value
+is here"
 ```
+
+### Important Notes
+When using multi-line values (like ENV_KEY_MULTILINE in the example), the action will automatically wrap the value in quotes and retain the line breaks. This makes it compatible with the .env format. Single-line values are added directly without quotes.

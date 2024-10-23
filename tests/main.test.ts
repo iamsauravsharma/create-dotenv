@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
+import dotenv from "dotenv";
 
 test("test if env file value matched with actual value", async () => {
     const envFilePath = path.resolve(__dirname, "development.env");
@@ -11,30 +12,26 @@ test("test if env file value matched with actual value", async () => {
         ["OUTPUT_API_KEY", "USER_API_KEY"],
         ["OUTPUT_SECRET_KEY", "secret123"],
         ["OUTPUT_ENV_KEY_MULTIPLE", "test"],
+        ["OUTPUT_WITH_QUOTE", "quote_value"],
+        ["OUTPUT_WITH_START_QUOTE", '"quote'],
+        ["OUTPUT_WITH_NON_START_QUOTE", 'quote"_value"'],
+        ["OUTPUT_MULTILINE", "some multiline\nstring here\n"],
     ]);
-    let actualMap: Map<string, string> = new Map();
-    const readLineInterface = readline.createInterface({
-        input: fs.createReadStream(envFilePath),
-        crlfDelay: Infinity,
-    });
-    for await (const line of readLineInterface) {
-        const splitLine = line.split("=");
-        if (splitLine.length != 2) {
-            continue;
-        }
-        actualMap.set(splitLine[0], splitLine[1]);
-    }
-    if (actualMap.size != expectedMap.size) {
+    const processedEnv = {};
+    dotenv.config({ path: envFilePath, processEnv: processedEnv });
+    const actualMap = new Map(Object.entries(processedEnv));
+
+    if (actualMap.size !== expectedMap.size) {
         console.log(`Expected: ${[...expectedMap.entries()]}`);
-        console.log(`Actual: ${[...expectedMap.entries()]}`);
-        throw new Error("Size of two map doesn't matched");
+        console.log(`Actual: ${[...actualMap.entries()]}`);
+        throw new Error("Size of two map is not same");
     }
     for (const [key, val] of expectedMap) {
         const actualValue = actualMap.get(key);
-        if (actualValue != val) {
-            console.log(`Expected: ${[...expectedMap.entries()]}`);
-            console.log(`Actual: ${[...expectedMap.entries()]}`);
-            throw new Error("Value doesn't matched");
+        if (actualValue !== val) {
+            console.log(`Expected: ${val}`);
+            console.log(`Actual: ${actualValue}`);
+            throw new Error(`${key} value is different with each other`);
         }
     }
 });
