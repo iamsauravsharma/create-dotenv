@@ -20,14 +20,13 @@ jobs:
         with:
           node-version: "lts/*"
           check-latest: true
-      - run: |
-          corepack enable
+      - run: corepack enable
       - name: Install dependencies
-        run: |
-          pnpm install
-      - name: Build and package action
-        run: |
-          pnpm run format-check && pnpm run build && pnpm run package
+        run: pnpm install
+      - name: Check formatting and lint
+        run: pnpm run format && pnpm run check
+      - name: Run build and package command
+        run: pnpm run build && pnpm run package
       - name: Verify is there is no diff
         run: |
           if [[ -n $(git diff --exit-code) ]]
@@ -77,8 +76,6 @@ jobs:
         run: |
           cat tests/development.env
       - name: Install pnpm dependencies
-        run: |
-          pnpm install
+        run: pnpm install
       - name: Run test
-        run: |
-          pnpm run test
+        run: pnpm run test

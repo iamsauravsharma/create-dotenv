@@ -1,6 +1,6 @@
+import { writeFile } from "node:fs";
+import { EOL } from "node:os";
 import { info, setFailed } from "@actions/core";
-import { writeFile } from "fs";
-import { EOL } from "os";
 
 function envContentFromMap(
     contentMap: Map<string, string>,
