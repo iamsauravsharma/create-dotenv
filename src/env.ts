@@ -17,7 +17,11 @@ export function readEnv(envPrefix: string): Map<string, string> {
                 }
             } else {
                 const preDefinedEnvPrefix = ["GITHUB_", "RUNNER_"];
-                if (!preDefinedEnvPrefix.some((prefix) => key.startsWith(prefix))) {
+                if (
+                    !preDefinedEnvPrefix.some((prefix) =>
+                        key.startsWith(prefix),
+                    )
+                ) {
                     envFileMap.set(key, value);
                 }
             }

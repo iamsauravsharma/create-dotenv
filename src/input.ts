@@ -1,4 +1,4 @@
-import { info, getInput } from "@actions/core";
+import { getInput, info } from "@actions/core";
 
 export interface Input {
     inputPrefix: string;

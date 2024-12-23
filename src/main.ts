@@ -1,4 +1,4 @@
-import { Input, readInput } from "./input";
+import { type Input, readInput } from "./input";
 
 import { readEnv } from "./env";
 import { writeToFile } from "./file";

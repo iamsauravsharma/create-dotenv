@@ -1,7 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
-import * as readline from "readline";
+import * as path from "node:path";
 import dotenv from "dotenv";
+import { test } from "vitest";
 
 test("test if env file value matched with actual value", async () => {
     const envFilePath = path.resolve(__dirname, "development.env");
