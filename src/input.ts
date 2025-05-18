@@ -4,6 +4,7 @@ export interface Input {
     inputPrefix: string;
     filePath: string;
     outputPrefix: string;
+    writeMode: string;
 }
 
 export function readInput(): Input {
@@ -12,5 +13,6 @@ export function readInput(): Input {
     const inputPrefix = getInput("input-prefix");
     const filePath = getInput("file-path");
     const outputPrefix = getInput("output-prefix");
-    return { inputPrefix, filePath, outputPrefix } as Input;
+    const writeMode = getInput("write-mode");
+    return { inputPrefix, filePath, outputPrefix, writeMode } as Input;
 }

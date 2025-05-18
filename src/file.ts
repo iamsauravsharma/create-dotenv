@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs";
+import { appendFile, writeFile } from "node:fs";
 import { EOL } from "node:os";
 import { info, setFailed } from "@actions/core";
 
@@ -25,14 +25,27 @@ export async function writeToFile(
     envFilePath: string,
     contentMap: Map<string, string>,
     outputPrefix: string,
+    writeMode: string,
 ): Promise<void> {
     const envFileContent = envContentFromMap(contentMap, outputPrefix);
 
     info(`Writing env content to file ${envFilePath}`);
 
-    writeFile(envFilePath, envFileContent, (err) => {
-        if (err) {
-            setFailed(err);
-        }
-    });
+    if (writeMode === "overwrite") {
+        writeFile(envFilePath, envFileContent, (err) => {
+            if (err) {
+                setFailed(err);
+            }
+        });
+    } else if (writeMode === "append") {
+        appendFile(envFilePath, envFileContent, (err) => {
+            if (err) {
+                setFailed(err);
+            }
+        });
+    } else {
+        setFailed(
+            "Only two mode or write mode is supported overwrite or append",
+        );
+    }
 }

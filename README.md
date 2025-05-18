@@ -16,6 +16,10 @@ Location of dot env file. Default is `'.env'`
 
 The prefix which should be added to .env file. Default is `''` which adds environment variable as it is after removing input-prefix from it
 
+### `write-mode`
+
+The writing mode which can be either `append` or `overwrite`. Default is `overwrite`
+
 ## Example usage
 
 ```yaml
@@ -42,6 +46,7 @@ jobs:
           input-prefix: 'ENV_KEY_' # Optional (default: '')
           file-path: 'tests/development.env' # Optional (default : '.env')
           output-prefix: 'OUTPUT_' # Optional (default: '')
+          write-mode: 'append' # Optional (default: 'overwrite')
         env: # env available for only this steps
           IS_SERVER: true
           ENV_KEY_USERNAME: admin

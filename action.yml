@@ -17,6 +17,10 @@ inputs:
         description: "Prefix for .env file content"
         required: false
         default: ""
+    write-mode:
+        description: "Mode for writing a file which can be either overwrite mode or read mode"
+        required: false
+        default: "overwrite"
 runs:
     using: "node20"
     main: "dist/index.js"

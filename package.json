@@ -4,7 +4,7 @@
     "private": true,
     "description": "Create dotenv file for github actions",
     "main": "lib/main.js",
-    "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf",
+    "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977",
     "scripts": {
         "build": "tsc",
         "format": "biome format",
@@ -30,10 +30,10 @@
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
-        "@types/node": "^22.10.2",
+        "@types/node": "^22.15.18",
         "@vercel/ncc": "^0.38.3",
-        "dotenv": "^16.4.7",
-        "typescript": "^5.7.2",
-        "vitest": "^2.1.8"
+        "dotenv": "^16.5.0",
+        "typescript": "^5.8.3",
+        "vitest": "^3.1.3"
     }
 }
