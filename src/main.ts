@@ -8,7 +8,12 @@ async function run(): Promise<void> {
 
     const envFileMap = readEnv(input.inputPrefix);
 
-    await writeToFile(input.filePath, envFileMap, input.outputPrefix);
+    await writeToFile(
+        input.filePath,
+        envFileMap,
+        input.outputPrefix,
+        input.writeMode,
+    );
 }
 
 run();

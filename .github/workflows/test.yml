@@ -41,6 +41,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+        mode: [overwrite, append]
     runs-on: ${{ matrix.os }}
     env:
       ENV_KEY_DEBUG: true
@@ -51,14 +52,21 @@ jobs:
         with:
           node-version: "lts/*"
           check-latest: true
-      - run: |
+      - name: enable corepack
+        run: |
           corepack enable
+      - name: write initial content to .env
+        if: ${{ matrix.mode == 'append' }}
+        run: |
+          echo "OUTPUT_API_KEY=USER_API_KEY" >> tests/development.env
+          echo "OUTPUT_SECRET_KEY=secret123" >> tests/development.env
       - id: test-action
         uses: ./
         with:
           input-prefix: "ENV_KEY_"
           file-path: "tests/development.env"
           output-prefix: "OUTPUT_"
+          write-mode: ${{ matrix.mode }}
         env:
           IS_SERVER: false
           ENV_KEY_USERNAME: admin
