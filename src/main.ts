@@ -1,7 +1,6 @@
-import { type Input, readInput } from "./input";
-
 import { readEnv } from "./env";
 import { writeToFile } from "./file";
+import { type Input, readInput } from "./input";
 
 async function run(): Promise<void> {
     const input: Input = readInput();
