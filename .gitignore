@@ -3,5 +3,5 @@ node_modules/
 lib/
 
 # Mac related
-.DS_STORE
+.DS_Store
 *.env
