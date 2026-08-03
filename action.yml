@@ -18,7 +18,7 @@ inputs:
         required: false
         default: ""
     write-mode:
-        description: "Mode for writing a file which can be either overwrite mode or read mode"
+        description: "Mode for writing a file which can be either overwrite or append"
         required: false
         default: "overwrite"
 runs:

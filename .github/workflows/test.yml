@@ -57,9 +57,10 @@ jobs:
           corepack enable
       - name: write initial content to .env
         if: ${{ matrix.mode == 'append' }}
+        shell: bash
         run: |
-          echo "OUTPUT_API_KEY=USER_API_KEY" >> tests/development.env
-          echo "OUTPUT_SECRET_KEY=secret123" >> tests/development.env
+          echo "OUTPUT_USERNAME=root" >> tests/development.env
+          printf 'OUTPUT_SEEDED=initial_value' >> tests/development.env
       - id: test-action
         uses: ./
         with:
@@ -75,8 +76,19 @@ jobs:
           ENV_KEY_ENV_KEY_MULTIPLE: test
           SOME_ENV_KEY: no_value
           ENV_KEY_WITH_QUOTE: "quote_value"
-          ENV_KEY_WITH_START_QUOTE: '''"quote'''
+          ENV_KEY_WITH_START_QUOTE: '"quote'
           ENV_KEY_WITH_NON_START_QUOTE: quote"_value"
+          ENV_KEY_FULLY_QUOTED: '"hello"'
+          ENV_KEY_WITH_HASH: 'pass#word'
+          ENV_KEY_WITH_SPACES: '  padded  '
+          ENV_KEY_WITH_SINGLE_QUOTE: "it's a value"
+          ENV_KEY_WITH_BOTH_QUOTES: "it's \"quoted\""
+          ENV_KEY_WITH_BACKTICK: 'back`tick'
+          ENV_KEY_WITH_EQUALS: 'a=b=c'
+          ENV_KEY_JSON: '{"key": "value"}'
+          ENV_KEY_WINDOWS_PATH: 'C:\Users\test\bin'
+          ENV_KEY_URL: 'https://user:pass@example.com/path?a=1&b=2'
+          ENV_KEY_EMPTY: ''
           ENV_KEY_MULTILINE: |
             some multiline
             string here
@@ -86,4 +98,6 @@ jobs:
       - name: Install pnpm dependencies
         run: pnpm install
       - name: Run test
+        env:
+          WRITE_MODE: ${{ matrix.mode }}
         run: pnpm run test

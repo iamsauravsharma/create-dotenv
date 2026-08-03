@@ -17,8 +17,7 @@ function readEnv(envPrefix) {
         if (value) {
             if (envPrefix) {
                 if (key.startsWith(envPrefix)) {
-                    const regex = RegExp(`^${envPrefix}`);
-                    const envKeyName = key.replace(regex, "");
+                    const envKeyName = key.slice(envPrefix.length);
                     envFileMap.set(envKeyName, value);
                 }
             }
@@ -52,41 +51,79 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.writeToFile = writeToFile;
-const node_fs_1 = __nccwpck_require__(3024);
+const promises_1 = __nccwpck_require__(1455);
 const node_os_1 = __nccwpck_require__(8161);
 const core_1 = __nccwpck_require__(6966);
+function endsWithoutNewline(filePath) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let handle;
+        try {
+            handle = yield (0, promises_1.open)(filePath, "r");
+        }
+        catch (error) {
+            if (error.code === "ENOENT") {
+                return false;
+            }
+            throw error;
+        }
+        try {
+            const { size } = yield handle.stat();
+            if (size === 0) {
+                return false;
+            }
+            const lastByte = Buffer.alloc(1);
+            yield handle.read(lastByte, 0, 1, size - 1);
+            return lastByte[0] !== "\n".charCodeAt(0);
+        }
+        finally {
+            yield handle.close();
+        }
+    });
+}
+function formatEnvValue(value) {
+    const needsQuoting = /[\r\n#'"`]/.test(value) || value !== value.trim();
+    if (!needsQuoting) {
+        return value;
+    }
+    if (!value.includes('"')) {
+        return `"${value.replace(/\n/g, "\\n").replace(/\r/g, "\\r")}"`;
+    }
+    if (!value.includes("'") && !/[\r\n]/.test(value)) {
+        return `'${value}'`;
+    }
+    if (!value.includes("`") && !/[\r\n]/.test(value)) {
+        return `\`${value}\``;
+    }
+    return `"${value
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")}"`;
+}
 function envContentFromMap(contentMap, outputPrefix) {
     (0, core_1.info)("Converting env content map to array");
     const envFileArray = [];
     for (const [key, value] of contentMap) {
-        const envValue = value.includes("\n") ? `"${value}"` : value;
-        const envLine = `${outputPrefix}${key}=${envValue}`;
+        const envLine = `${outputPrefix}${key}=${formatEnvValue(value)}`;
         envFileArray.push(envLine);
     }
     (0, core_1.info)("Converting env array into string");
-    const envContent = envFileArray.join(node_os_1.EOL);
-    return envContent;
+    if (envFileArray.length === 0) {
+        return "";
+    }
+    return envFileArray.join(node_os_1.EOL) + node_os_1.EOL;
 }
 function writeToFile(envFilePath, contentMap, outputPrefix, writeMode) {
     return __awaiter(this, void 0, void 0, function* () {
         const envFileContent = envContentFromMap(contentMap, outputPrefix);
         (0, core_1.info)(`Writing env content to file ${envFilePath}`);
         if (writeMode === "overwrite") {
-            (0, node_fs_1.writeFile)(envFilePath, envFileContent, (err) => {
-                if (err) {
-                    (0, core_1.setFailed)(err);
-                }
-            });
-        }
-        else if (writeMode === "append") {
-            (0, node_fs_1.appendFile)(envFilePath, envFileContent, (err) => {
-                if (err) {
-                    (0, core_1.setFailed)(err);
-                }
-            });
+            yield (0, promises_1.writeFile)(envFilePath, envFileContent);
         }
         else {
-            (0, core_1.setFailed)("Only two mode or write mode is supported overwrite or append");
+            const separator = envFileContent !== "" && (yield endsWithoutNewline(envFilePath))
+                ? node_os_1.EOL
+                : "";
+            yield (0, promises_1.appendFile)(envFilePath, separator + envFileContent);
         }
     });
 }
@@ -102,13 +139,20 @@ function writeToFile(envFilePath, contentMap, outputPrefix, writeMode) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.readInput = readInput;
 const core_1 = __nccwpck_require__(6966);
+function parseWriteMode(value) {
+    if (value === "overwrite" || value === "append") {
+        return value;
+    }
+    throw new Error(`Unsupported write-mode "${value}": only "overwrite" and "append" are supported`);
+}
 function readInput() {
     (0, core_1.info)("Reading input parameters");
-    const inputPrefix = (0, core_1.getInput)("input-prefix");
-    const filePath = (0, core_1.getInput)("file-path");
-    const outputPrefix = (0, core_1.getInput)("output-prefix");
-    const writeMode = (0, core_1.getInput)("write-mode");
-    return { inputPrefix, filePath, outputPrefix, writeMode };
+    return {
+        inputPrefix: (0, core_1.getInput)("input-prefix"),
+        filePath: (0, core_1.getInput)("file-path"),
+        outputPrefix: (0, core_1.getInput)("output-prefix"),
+        writeMode: parseWriteMode((0, core_1.getInput)("write-mode")),
+    };
 }
 
 
@@ -129,6 +173,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(6966);
 const env_1 = __nccwpck_require__(9056);
 const file_1 = __nccwpck_require__(9237);
 const input_1 = __nccwpck_require__(895);
@@ -139,7 +184,9 @@ function run() {
         yield (0, file_1.writeToFile)(input.filePath, envFileMap, input.outputPrefix, input.writeMode);
     });
 }
-run();
+run().catch((error) => {
+    (0, core_1.setFailed)(error instanceof Error ? error : String(error));
+});
 
 
 /***/ }),
@@ -25906,11 +25953,11 @@ module.exports = require("node:events");
 
 /***/ }),
 
-/***/ 3024:
+/***/ 1455:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("node:fs");
+module.exports = require("node:fs/promises");
 
 /***/ }),
 
